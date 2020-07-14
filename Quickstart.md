@@ -69,7 +69,7 @@ Once connected to the blockchain via an `LCDClient` instance, you can begin quer
 
 ```ts
 async main() {
-  const marketParams = await terra.market.params();
+  const marketParams = await terra.market.parameters();
   const exchangeRates = await terra.oracle.exchangeRates();
   console.log(marketParams.base_pool);
   console.log(exchangeRates.get('uusd'));
