@@ -6,8 +6,7 @@
 
 ## Working with Data
 - [[Numeric]]
-- [[Coin]]
-- [[Coins]]
+- [[Coin and Coins]]
 
 ## Developer Guide
 
