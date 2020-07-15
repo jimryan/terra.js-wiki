@@ -1,5 +1,5 @@
 ## Tutorial
-
+- [[Making a connection]]
 - [[Querying]]
 - Transactions
 
