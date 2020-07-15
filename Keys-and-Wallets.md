@@ -1,0 +1,1 @@
+In order to manage accounts using Terra.js, you will need to use a **Key**, which is an abstraction around signing functions.
