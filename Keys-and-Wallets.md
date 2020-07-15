@@ -44,7 +44,7 @@ console.log(rk.privateKey);
 import { MnemonicKey } from '@terra-money/terra.js';
 
 const mk = new MnemonicKey({
-  mnemonic: "<24-word mnemonic",
+  mnemonic: "<24-word mnemonic>",
 });
 ```
 
