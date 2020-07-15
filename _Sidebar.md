@@ -4,6 +4,7 @@
 - [[Querying]]
 - [[Keys and Wallets]]
 - [[Transactions]]
+- [[Fees]]
 
 ## Working with Data
 - [[Numeric]]
