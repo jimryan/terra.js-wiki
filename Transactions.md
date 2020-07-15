@@ -11,7 +11,7 @@ The **messages** included in a transaction contain the information that will be 
 
 ## Creating Transactions
 
-## Create a Wallet
+### Create a Wallet
 
 You will first want to create a wallet which you can use to sign transactions.
 
@@ -26,7 +26,7 @@ const terra = new LCDClient({
 const wallet = terra.wallet(mk);
 ```
 
-## Create Messages
+### Create Messages
 
 ```ts
 import { MsgSend } from '@terra-money/terra.js';
@@ -38,7 +38,7 @@ const send = new MsgSend(
 );
 ```
 
-## Create and Sign Transaction
+### Create and Sign Transaction
 
 ```ts
 const tx = await wallet.createAndSignTx({
@@ -47,7 +47,7 @@ const tx = await wallet.createAndSignTx({
 });
 ```
 
-## Broadcast Transaction
+### Broadcast Transaction
 
 ```ts
 await terra.tx.broadcast(tx);
