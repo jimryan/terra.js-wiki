@@ -1,4 +1,5 @@
-## Tutorial
+## Guides
+
 - [[Making a connection]]
 - [[Querying]]
 - [[Keys and Wallets]]
