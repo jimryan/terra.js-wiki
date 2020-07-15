@@ -57,7 +57,7 @@ console.log(mk.mnemonic);
 
 ## Custom Key Implementation
 
-If you need to write your own key management solution, you will need to subclass the abstract `Key` class and provide your own signing function. Note that the key need not expose any details pertaining to the private key -- you could specify a `sign()` function that forwards the signing request to a server or to a hardware wallet, for instance. The remaining functions related to
+If you need to write your own key management solution, you will need to subclass the abstract `Key` class and provide your own signing function. Note that the key need not expose any details pertaining to the private key -- you could specify a `sign()` function that forwards the signing request to a server or to a hardware wallet, for instance. The remaining functions related to signing (`createSignature()` and `signTx()`) are automatically provided and use `sign()` underneath.
 
 The following code listing is the implementation of `RawKey`, which illustrates how to write a custom `Key`:
 
