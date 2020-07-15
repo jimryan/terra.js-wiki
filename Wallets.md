@@ -37,7 +37,7 @@ A wallet makes it easy to create a transaction by automatically fetching the acc
 const msgs = [ ... ]; // list of messages
 const fee = StdFee(...); // optional fee
 
-const unsignedTx = wallet.createTx({
+const unsignedTx = await wallet.createTx({
   msgs,
   // fee, (optional)
   memo: 'this is optional'
@@ -53,7 +53,7 @@ const tx = wallet.key.signTx(unsignedTx);
 You can also use the convenience function `Wallet.createAndSignTx()`, which automatically generates a signed transaction to be broadcast:
 
 ```ts
-const tx = wallet.createAndSignTx({
+const tx = await wallet.createAndSignTx({
   msgs,
   fee,  
   memo: 'this is optional'
