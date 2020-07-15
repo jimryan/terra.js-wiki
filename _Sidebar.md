@@ -1,7 +1,6 @@
 ## Tutorial
 
-- Connecting to the blockchain
-- Interacting with modules
+- Querying
 - Transactions
 
 ## Working with Data
@@ -10,7 +9,8 @@
 
 ## Developer Guide
 
-- Adding a new module
+- Adding a module
+- Adding messages
 
 ## Other Resources
 
