@@ -1,12 +1,13 @@
 ## Tutorial
 - [[Making a connection]]
 - [[Querying]]
-- [[Keys & Wallets]]
+- [[Keys and Wallets]]
 - [[Transactions]]
 
 ## Working with Data
 
-- [[Coin & Coins]]
+- [[Coin]]
+- [[Coins]]
 
 ## Developer Guide
 
