@@ -1,6 +1,6 @@
 ## Tutorial
 
-- Querying
+- [[Querying]]
 - Transactions
 
 ## Working with Data
