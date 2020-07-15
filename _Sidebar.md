@@ -5,7 +5,7 @@
 - [[Transactions]]
 
 ## Working with Data
-
+- [[Numeric]]
 - [[Coin]]
 - [[Coins]]
 
