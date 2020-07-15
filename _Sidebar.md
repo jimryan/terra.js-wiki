@@ -2,7 +2,8 @@
 
 - [[Making a connection]]
 - [[Querying]]
-- [[Keys and Wallets]]
+- [[Keys]]
+- [[Wallets]]
 - [[Transactions]]
 - [[Fees]]
 
