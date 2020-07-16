@@ -6,6 +6,7 @@
 - [[Wallets]]
 - [[Transactions]]
 - [[Fees]]
+- [[Smart Contracts]]
 
 ## Working with Data
 - [[Numeric]]
