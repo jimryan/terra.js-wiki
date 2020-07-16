@@ -6,6 +6,7 @@
 - [[Wallets]]
 - [[Transactions]]
 - [[Fees]]
+- [[Oracle Feeder]]
 - [[Smart Contracts]]
 
 ## Working with Data
