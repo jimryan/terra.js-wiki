@@ -51,6 +51,7 @@ async function main() {
       (lastSuccessVotePeriod && lastSuccessVotePeriod === currentVotePeriod) ||
       indexInVotePeriod >= oracleVotePeriod - 1
     ) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       continue;
     }
 ​
@@ -76,7 +77,7 @@ async function main() {
 ​
     lastSuccessVotePeriod = currentVotePeriod;
     lastVotePeriodVoteMsgs = voteMsgs;
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 }
 ​
