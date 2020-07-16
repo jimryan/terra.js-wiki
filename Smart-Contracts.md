@@ -30,7 +30,7 @@ const instantiateContract = new MsgInstantiateContract(
 
 Smart contracts respond to JSON messages called **HandleMsg** which can exist as different types. The smart contract writer should provide any end-users of the smart contract with the expected format of all the varieties of HandleMsg the contract is supposed to understand, in the form of a JSON schema. The schema thus provides an analog to Ethereum contracts' ABI.
 
-```
+```ts
 import { MsgExecuteContract } from '@terra-money/terra.js';
 
 const executeContract = new MsgExecuteContract(
