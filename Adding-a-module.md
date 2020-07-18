@@ -138,14 +138,113 @@ Finally, you will need to register the messages to be exported in `src/core/inde
 export 'greeting/msgs';
 ```
 
+## Adding Parameter Changes
+
+Terra.js provides an easy way to generate `ParameterChangeProposal`s, which is a proposal for changing the blockchain parameters associated with a module. If your module has parameters that can be changed via proposal, you should create the following files:
+
+`src/core/greeting/params.ts`
+
+```ts
+import { ParamChange } from '..';
+import { Convert } from '../../util/convert';
+
+type MaxHellos = ParamChange.Type<
+  'greeting',
+  'maxhellos',
+  number
+>;
+
+type MaxGoodbyes = ParamChange.Type<
+  'greeting',
+  'maxgoodbyes',
+  number
+>;
+
+export type GreetingParamChange =
+  | MaxHellos
+  | MaxGoodbyes;
+
+export namespace GreetingParamChange {
+  export type Data =
+    | ParamChange.Data.Type<MaxHellos>
+    | ParamChange.Data.Type<MaxGoodbyes>
+}
+
+export interface GreetingParamChanges {
+  greeting?: {
+    maxhellos?: number;
+    maxgoodbyes?: number;
+  };
+}
+
+export namespace GreetingParamChanges {
+  export const ConversionTable = {
+    greeting: {
+      maxhellos: [Convert.toNumber, Convert.toFixed],
+      maxgoodbyes: [Convert.toNumber, Convert.toFixed],
+    },
+  };
+}
+```
+
+Then register the parameter change types:
+
+`src/core/params/ParamChange.ts`
+
+```ts
+...
+import { GreetingParamChange, GreetingParamChanges } from '../greeting/params';
+...
+
+export type ParamChanges = DistributionParamChanges &
+  GovParamChanges &
+  GreetingParamChanges & // ADD HERE
+  MarketParamChanges &
+  OracleParamChanges &
+  SlashingParamChanges &
+  StakingParamChanges &
+  TreasuryParamChanges &
+  WasmParamChanges;
+
+export namespace ParamChanges {
+  export const ConversionTable = {
+    ...DistributionParamChanges.ConversionTable,
+    ...GovParamChanges.ConversionTable,
+    ...GreetingParamChanges.ConverstionTable, // ADD HERE
+    ...MarketParamChanges.ConversionTable,
+    ...OracleParamChanges.ConversionTable,
+    ...SlashingParamChanges.ConversionTable,
+    ...StakingParamChanges.ConversionTable,
+    ...TreasuryParamChanges.ConversionTable,
+    ...WasmParamChanges.ConversionTable,
+  };
+
+...
+
+export type ParamChange =
+  | DistributionParamChange
+  | GovParamChange
+  | GreetingParamChange // ADD HERE
+  | MarketParamChange
+  | OracleParamChange
+  | SlashingParamChange
+  | StakingParamChange
+  | TreasuryParamChange
+  | WasmParamChange;
+
+...
+
+```
+
+
 ## Adding API to LCDClient
 
 If there are API endpoints that exist for the new module, you will need to add this functionality to `LCDClient` so that they are accessible.
 
 Assume that our `greeting` module has the following endpoints:
 
-`GET /greeting/hello/{accAddress}`
-`GET /greeting/parameters`
+- `GET /greeting/hello/{accAddress}`
+- `GET /greeting/parameters`
 
 You will need to create `src/client/lcd/api/GreetingAPI.ts` with the following:
 
@@ -155,18 +254,20 @@ import { AccAddress } from "../../../core/strings";
 
 export interface GreetingParams {
   max_hellos: number;
+  max_goodbyes: number;
 }
 
 export namespace GreetingParams {
   export interface Data {
     max_hellos: string;
+    max_goodbyes: string;
   }
 }
 
 export class GreetingAPI extends BaseAPI {
   public async hello(accAddress: AccAddress): Promise<AccAddress[]> {
     return this.c
-      .get<AccAddress[]>(`/wasm/hello/${accAddress}`)
+      .get<AccAddress[]>(`/greeting/hello/${accAddress}`)
       .then(d => d.result);
   }
 
@@ -176,6 +277,7 @@ export class GreetingAPI extends BaseAPI {
       .then(d => d.result)
       .then(d => ({
         max_hellos: Number.parseInt(d.max_hellos),
+        max_goodbyes: Number.parseInt(d.max_goodbyes)
       }));
   }
 }
