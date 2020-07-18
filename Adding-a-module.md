@@ -129,3 +129,11 @@ export namespace Msg {
   }
 }
 ```
+
+Finally, you will need to register the messages to be exported in `src/core/index.ts`:
+
+```ts
+...
+// greeting
+export 'greeting/msgs';
+```
