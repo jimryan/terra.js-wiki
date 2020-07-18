@@ -210,7 +210,7 @@ import {
   BankAPI,
   DistributionAPI,
   GovAPI,
-  GreetingAPI,
+  GreetingAPI, // ADD HERE
   MarketAPI,
   MsgAuthAPI,
   OracleAPI,
@@ -234,7 +234,7 @@ export class LCDClient {
   public bank: BankAPI;
   public distribution: DistributionAPI;
   public gov: GovAPI;
-  public greeting: GreetingAPI; // HERE
+  public greeting: GreetingAPI; // ADD HERE
   public market: MarketAPI;
   public msgauth: MsgAuthAPI;
   public oracle: OracleAPI;
