@@ -15,7 +15,7 @@
 
 ## Developer Guide
 
-- Adding a module
+- [[Adding a module]]
 - Adding messages
 
 ## Other Resources
