@@ -92,7 +92,7 @@ export type Msg =
   | BankMsg
   | DistributionMsg
   | GovMsg
-  | GreetingMsg
+  | GreetingMsg // ADD HERE
   | MarketMsg
   | MsgAuthMsg
   | OracleMsg
@@ -108,7 +108,7 @@ export namespace Msg {
     | BankMsg.Data
     | DistributionMsg.Data
     | GovMsg.Data
-    | Greeting.Data
+    | Greeting.Data // ADD HERE
     | MarketMsg.Data
     | MsgAuthMsg.Data
     | OracleMsg.Data
@@ -188,7 +188,7 @@ export * from './AuthAPI';
 export * from './BankAPI';
 export * from './DistributionAPI';
 export * from './GovAPI';
-export * from './GreetingAPI';
+export * from './GreetingAPI'; // ADD HERE
 export * from './MarketAPI';
 export * from './MsgAuthAPI';
 export * from './OracleAPI';
