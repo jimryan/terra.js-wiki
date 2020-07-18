@@ -137,3 +137,143 @@ Finally, you will need to register the messages to be exported in `src/core/inde
 // greeting
 export 'greeting/msgs';
 ```
+
+## Adding API to LCDClient
+
+If there are API endpoints that exist for the new module, you will need to add this functionality to `LCDClient` so that they are accessible.
+
+Assume that our `greeting` module has the following endpoints:
+
+`GET /greeting/hello/{accAddress}`
+`GET /greeting/parameters`
+
+You will need to create `src/client/lcd/api/GreetingAPI.ts` with the following:
+
+```ts
+import { BaseAPI } from "./BaseAPI";
+import { AccAddress } from "../../../core/strings";
+
+export interface GreetingParams {
+  max_hellos: number;
+}
+
+export namespace GreetingParams {
+  export interface Data {
+    max_hellos: string;
+  }
+}
+
+export class GreetingAPI extends BaseAPI {
+  public async hello(accAddress: AccAddress): Promise<AccAddress[]> {
+    return this.c
+      .get<AccAddress[]>(`/wasm/hello/${accAddress}`)
+      .then(d => d.result);
+  }
+
+  public async parameters(): Promise<GreetingParams> {
+    return this.c
+      .get<GreetingParams.Data>(`/greeting/parameters`)
+      .then(d => d.result)
+      .then(d => ({
+        max_hellos: Number.parseInt(d.max_hellos),
+      }));
+  }
+}
+```
+
+Then, you need to register it inside `src/client/lcd/api/index.ts`:
+
+```ts
+export * from './AuthAPI';
+export * from './BankAPI';
+export * from './DistributionAPI';
+export * from './GovAPI';
+export * from './GreetingAPI';
+export * from './MarketAPI';
+export * from './MsgAuthAPI';
+export * from './OracleAPI';
+export * from './SlashingAPI';
+export * from './StakingAPI';
+export * from './SupplyAPI';
+export * from './TendermintAPI';
+export * from './TreasuryAPI';
+export * from './TxAPI';
+export * from './WasmAPI';
+```
+
+Finally, you need to add it to `src/client/lcd/LCDClient.ts`:
+
+```ts
+...
+import {
+  AuthAPI,
+  BankAPI,
+  DistributionAPI,
+  GovAPI,
+  GreetingAPI,
+  MarketAPI,
+  MsgAuthAPI,
+  OracleAPI,
+  SlashingAPI,
+  StakingAPI,
+  SupplyAPI,
+  TendermintAPI,
+  TreasuryAPI,
+  TxAPI,
+  WasmAPI,
+} from './api';
+...
+
+
+export class LCDClient {
+  public config: LCDClientConfig;
+  public apiRequester: APIRequester;
+
+  // API access
+  public auth: AuthAPI;
+  public bank: BankAPI;
+  public distribution: DistributionAPI;
+  public gov: GovAPI;
+  public greeting: GreetingAPI; // HERE
+  public market: MarketAPI;
+  public msgauth: MsgAuthAPI;
+  public oracle: OracleAPI;
+  public slashing: SlashingAPI;
+  public staking: StakingAPI;
+  public supply: SupplyAPI;
+  public tendermint: TendermintAPI;
+  public treasury: TreasuryAPI;
+  public wasm: WasmAPI;
+  public tx: TxAPI;
+
+  /**
+   * Creates a new LCD client with the specified configuration.
+   *
+   * @param config LCD configuration
+   */
+  constructor(config: LCDClientConfig) {
+    this.config = {
+      ...DEFAULT_LCD_OPTIONS,
+      ...config,
+    };
+
+    this.apiRequester = new APIRequester(this.config.URL);
+
+    // instantiate APIs
+    this.auth = new AuthAPI(this.apiRequester);
+    this.bank = new BankAPI(this.apiRequester);
+    this.distribution = new DistributionAPI(this.apiRequester);
+    this.gov = new GovAPI(this.apiRequester);
+    this.greeting = new GreetingAPI(this.apiRequester); // ADD HERE
+    this.market = new MarketAPI(this.apiRequester);
+    this.msgauth = new MsgAuthAPI(this.apiRequester);
+    this.oracle = new OracleAPI(this.apiRequester);
+    this.slashing = new SlashingAPI(this.apiRequester);
+    this.staking = new StakingAPI(this.apiRequester);
+    this.supply = new SupplyAPI(this.apiRequester);
+    this.tendermint = new TendermintAPI(this.apiRequester);
+    this.treasury = new TreasuryAPI(this.apiRequester);
+    this.wasm = new WasmAPI(this.apiRequester);
+    this.tx = new TxAPI(this);
+  }
+```
