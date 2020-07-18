@@ -32,7 +32,7 @@ const wallet = terra.wallet(mk);
 import { MsgSend } from '@terra-money/terra.js';
 
 const send = new MsgSend(
-  wallet.accAddress,
+  wallet.key.accAddress,
   "<random-terra-address>",
   { uluna: 1000 }
 );
