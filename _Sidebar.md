@@ -6,7 +6,6 @@
 - [[Wallets]]
 - [[Transactions]]
 - [[Fees]]
-- [[Oracle Feeder]]
 - [[Smart Contracts]]
 
 ## Working with Data
@@ -16,6 +15,9 @@
 ## Developer Guide
 
 - [[Adding a module]]
+
+## Recipes
+- [[Oracle Feeder]]
 
 ## Other Resources
 
