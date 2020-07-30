@@ -2,7 +2,7 @@ The following code segment demonstrates how to create a simple price oracle feed
 
 Note the following:
 
-1. Prevotes are automatically generated using `MsgExchangeRateVote.getPrevote()`
+1. Prevotes are automatically generated using [`MsgExchangeRateVote.getPrevote()`](https://terra-project.github.io/terra.js/classes/msgexchangeratevote.html#getprevote)
 
 2. `MsgExchangeRateVote` messages must precede `MsgExchangeRatePrevote` messages in sequence inside a transaction otherwise the `MsgExchangeRatePrevote` would override the current registered outstanding prevote for the validator.
 
