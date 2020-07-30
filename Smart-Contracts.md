@@ -56,7 +56,7 @@ const instantiateTx = await wallet.createAndSignTx({
 });
 
 const instantiateTxResult = await terra.tx.broadcast(instantiateTx);
-const contractAddress = instantiateContractTxResult.logs[0].events[0].attributes[2].value;
+const contractAddress = instantiateTxResult.logs[0].events[0].attributes[2].value;
 ```
 
 ## Executing a Contract
