@@ -29,6 +29,6 @@ const terra = new LCDClient({
 You can override these settings by estimating it yourself and specifying the resultant fee:
 
 ```ts
-const fee = await terra.tx.estimateFee(tx, { gasPrices: { ukrw: 1, uluna: 5 } });
+const fee = await terra.tx.estimateFee(unsignedTx, { gasPrices: { ukrw: 1, uluna: 5 } });
 const tx = await wallet.createAndSignTx({ msgs, fee });
 ```
