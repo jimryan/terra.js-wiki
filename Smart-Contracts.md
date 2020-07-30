@@ -5,11 +5,33 @@ This document explains how to perform tasks related to working with smart contra
 You will first need a compiled WASM smart contract's binary to upload.
 
 ```ts
-import { MsgStoreCode } from '@terra-money/terra.js';
+import { LCDClient, MsgStoreCode, MnemonicKey } from '@terra-money/terra.js';
+import * as fs from 'fs';
+
+// test1 key from localterra accounts
+const mk = new MnemonicKey({
+  mnemonic: 'terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v'
+})
+
+// connect to localterra
+const terra = new LCDClient({
+  URL: 'http://localhost:1317',
+  chainId: 'localterra'
+});
+
+const wallet = terra.wallet(mk);
 
 const storeCode = new MsgStoreCode(
-
+  wallet.key.accAddress,
+  fs.readFileSync('contract.wasm').toString('base64')
 );
+
+const storeCodeTx = await terra.createAndSignTx({
+  msgs: [storeCode]
+});
+
+const storeCodeTxResult = await terra.tx.broadcast(tx);
+const codeId = +storeCodeTxResult.logs[0].events[1].attributes[1].value;
 ```
 
 ## Creating a Contract
@@ -21,9 +43,20 @@ To create (instantiate) a smart contract, you must first know the code ID of an 
 ```ts
 import { MsgInstantiateContract } from '@terra-money/terra.js';
 
-const instantiateContract = new MsgInstantiateContract(
-
+const instantiate = new MsgInstantiateContract(
+  wallet.key.accAddress // owner
+  codeId, // code ID
+  { ...initMsg }, // InitMsg
+  { uluna: 10000000, ukrw: 1000000 }, // init coins
+  false // migratable
 );
+
+const instantiateTx = await wallet.createAndSignTx({
+  msgs: [instantiate]
+});
+
+const instantiateTxResult = await terra.tx.broadcast(instantiateTx);
+const contractAddress = instantiateContractTxResult.logs[0].events[0].attributes[2].value;
 ```
 
 ## Executing a Contract
@@ -33,14 +66,27 @@ Smart contracts respond to JSON messages called **HandleMsg** which can exist as
 ```ts
 import { MsgExecuteContract } from '@terra-money/terra.js';
 
-const executeContract = new MsgExecuteContract(
-
+const execute = new MsgExecuteContract(
+  wallet.key.accAddress, // sender
+  contractAddress, // contract account address
+  { ...executeMsg }, // handle msg
+  { uluna: 100000 } // coins
 );
-```
 
+const executeTx = await wallet.createAndSignTx({
+  msg: [execute]
+});
+
+const executeTxResult = await terra.tx.broadcast(executeTx);
+```
 
 ## Query Data from a Contract
 
+A contract can define a query handler, which understands requests for data specified in a JSON message called a QueryMsg. Unlike the message handler, the query handler cannot modify the contract's or blockchain's state -- it is a readonly operation. Therefore, a querying data from a contract does not use a message and transaction, but works directly through the `LCDClient` API.
+
 ```ts
-const terra.wasm.contractQuery("", {});
+const result = await terra.wasm.contractQuery(
+  contractAddress,
+  { query: { queryMsgArguments } } // query msg
+);
 ```
