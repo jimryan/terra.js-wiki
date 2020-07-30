@@ -13,8 +13,8 @@ interface Key {
   valPubKey: ValPubKey;
   
   createSignature(tx: StdSignMsg): StdSignature;
-  signTx(tx: StdSignMsg): StdTx;
-  sign(payload: Buffer): Buffer;
+  signTx(tx: StdSignMsg): Promise<StdTx>;
+  sign(payload: Buffer): Promise<Buffer>;
 }
 ```
 
@@ -84,7 +84,7 @@ export class RawKey extends Key {
     this.privateKey = privateKey;
   }
 
-  public sign(payload: Buffer): Buffer {
+  public sign(payload: Buffer): Promise<Buffer> {
     const hash = Buffer.from(SHA256(payload.toString()).toString(), 'hex');
     const { signature } = secp256k1.ecdsaSign(
       Uint8Array.from(hash),
