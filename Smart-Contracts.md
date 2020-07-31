@@ -16,7 +16,7 @@ const mk = new MnemonicKey({
 // connect to localterra
 const terra = new LCDClient({
   URL: 'http://localhost:1317',
-  chainId: 'localterra'
+  chainID: 'localterra'
 });
 
 const wallet = terra.wallet(mk);
