@@ -20,7 +20,7 @@ You can define the fee estimation parameters when you create your `LCDClient` in
 ```ts
 const terra = new LCDClient({
   URL: 'https://lcd.terra.dev',
-  chainId: 'columbus-3',
+  chainID: 'columbus-3',
   gasPrices: { uluna: 0.015 },
   gasAdjustment: 1.4
 });
