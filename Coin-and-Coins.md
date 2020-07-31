@@ -11,3 +11,14 @@ const cs = new Coins([c, c2]);
 const cs2 = new Coins({ uluna: 12002, ukrw: 12399 });
 cs2.map(x => console.log(`${x.denom}: ${x.amount}`));
 ```
+
+Coin / Coins input with decimal input will automatically be converted to a decimal Coin.
+
+```ts
+const c = new Coin('uluna', 123.3); // a DecCoin
+const d = new Coin('uluna', '123.3'); // a DecCoin
+```
+
+If it is ambiguous, 
+
+Although it is convenient to represent the numbers through JavaScript's native `Number` format, you should 
