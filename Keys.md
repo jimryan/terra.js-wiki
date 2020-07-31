@@ -48,11 +48,35 @@ const mk = new MnemonicKey({
 });
 ```
 
+#### Generate random mnemonic
+
 If you want to generate a random mnemonic, you can create a `MnemonicKey` without any arguments:
 
 ```ts
 const mk = new MnemonicKey();
 console.log(mk.mnemonic);
+```
+
+#### Specifying HD path
+
+`MnemonicKey` can used to recover a wallet with a particular BIP44 HD path: `m/44'/${coinType}'/${account}'/0/${index}`. 
+
+```ts
+const mk = new MnemonicKey({
+  mnemonic: "<seed-phrase>", // optional, will be random if not provided
+  coinType: 330, // optional, default
+  account: 0, // optional, default
+  index: 0, // optional, default
+});
+```
+
+For example, to recover a mnemonic with the old Terra wallet HD path using coin type for ATOM (118):
+
+```ts
+const mk = new MnemonicKey({
+  mnemonic: "<seed-phrase>",
+  coinType: 118
+});
 ```
 
 ## Custom Key Implementation
