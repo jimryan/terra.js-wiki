@@ -26,27 +26,14 @@ const terra = new LCDClient({
 });
 ```
 
-You can override these settings by estimating it yourself and specifying the resultant fee:
+You can override these settings by passing the fee estimation parameters in `wallet.createTx` or `wallet.createAndSignTx`:
 
 ```ts
 import { StdSignMsg, StdFee } from '@terra-money/terra.js';
 
-// need to specify a fake fee with gas 0 and amount with small number of
-// denominations available in the signing account's balance (needed to simulate)
-
-const fakeFee = new StdFee(0, {
-  ukrw: 1
-});
-
-const unsignedTx = new StdSignMsg(
-  terra.config.chainId,
-  await wallet.accountNumber(),
-  await wallet.sequence(),
-  fakeFee,
+const tx = await wallet.createAndSignTx({
   msgs,
-  "memo if you have one" // optional
-);
-
-const fee = await terra.tx.estimateFee(unsignedTx, { gasPrices: { ukrw: 1, uluna: 5 } });
-const tx = await wallet.createAndSignTx({ msgs, fee });
+  gasPrices: { ukrw: 0.01 },
+  gasAdjustment: 1.9
+});
 ```
