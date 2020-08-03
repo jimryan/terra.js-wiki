@@ -3,7 +3,9 @@
 ```ts
 import { StdFee } from '@terra-money/terra.js';
 
+const msgs = [ new MsgSend( ... ), new MsgSwap( ... ), ]; // messages
 const fee = new StdFee(50000, { uluna: 4500000 });
+
 const tx = await wallet.createAndSignTx({ msgs, fee });
 ```
 
