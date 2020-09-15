@@ -18,6 +18,7 @@ Each module has its own set of querying functions. You can explore the documenta
 - [`distribution`](https://terra-project.github.io/terra.js/classes/distributionapi.html)
 - [`gov`](https://terra-project.github.io/terra.js/classes/distributionapi.html)
 - [`market`](https://terra-project.github.io/terra.js/classes/marketapi.html)
+- [`mint`](https://terra-project.github.io/terra.js/classes/mintapi.html)
 - [`msgauth`](https://terra-project.github.io/terra.js/classes/msgauthapi.html)
 - [`oracle`](https://terra-project.github.io/terra.js/classes/oracleapi.html)
 - [`slashing`](https://terra-project.github.io/terra.js/classes/slashingapi.html)
