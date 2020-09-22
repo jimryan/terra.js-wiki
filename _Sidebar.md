@@ -18,6 +18,7 @@
 
 ## Recipes
 - [[Oracle Feeder]]
+- [[MultiSend]]
 
 ## Other Resources
 
