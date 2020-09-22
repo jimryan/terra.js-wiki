@@ -1,3 +1,4 @@
+```js
 import {
   LCDClient,
   MnemonicKey,
@@ -78,3 +79,4 @@ async function main() {
 }
 
 main().catch(console.error);
+```
