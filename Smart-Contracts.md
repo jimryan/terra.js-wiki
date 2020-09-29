@@ -5,7 +5,7 @@ This document explains how to perform tasks related to working with smart contra
 You will first need a compiled WASM smart contract's binary to upload.
 
 ```ts
-import { LCDClient, MsgStoreCode, MnemonicKey } from '@terra-money/terra.js';
+import { LCDClient, MsgStoreCode, MnemonicKey, isTxError } from '@terra-money/terra.js';
 import * as fs from 'fs';
 
 // test1 key from localterra accounts
