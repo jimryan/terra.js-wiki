@@ -26,12 +26,15 @@ const storeCode = new MsgStoreCode(
   fs.readFileSync('contract.wasm').toString('base64')
 );
 
-const storeCodeTx = await terra.createAndSignTx({
-  msgs: [storeCode]
+const storeCodeTx = await wallet.createAndSignTx({
+  msgs: [storeCode],
+  fee: new StdFee(10000000, { uluna: 10000000 }),
 });
 
-const storeCodeTxResult = await terra.tx.broadcast(tx);
-const { store_code: { code_id } } = storeCodeTxResult.logs[0].events;
+const storeCodeTxResult = await terra.tx.broadcast(storeCodeTx);
+const {
+   store_code: { code_id },
+} = storeCodeTxResult.logs[0].eventsByType;
 ```
 
 ## Creating a Contract
@@ -56,7 +59,7 @@ const instantiateTx = await wallet.createAndSignTx({
 });
 
 const instantiateTxResult = await terra.tx.broadcast(instantiateTx);
-const { instantiate_contract: { contract_address } } = instantiateTxResult.logs[0].events;
+const { instantiate_contract: { contract_address } } = instantiateTxResult.logs[0].eventsByType;
 ```
 
 ## Executing a Contract
