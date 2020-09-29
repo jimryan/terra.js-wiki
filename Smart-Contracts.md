@@ -31,7 +31,7 @@ const storeCodeTx = await terra.createAndSignTx({
 });
 
 const storeCodeTxResult = await terra.tx.broadcast(tx);
-const codeId = +storeCodeTxResult.logs[0].events[1].attributes[1].value;
+const { store_code: { code_id } } = storeCodeTxResult.logs[0].events;
 ```
 
 ## Creating a Contract
@@ -45,7 +45,7 @@ import { MsgInstantiateContract } from '@terra-money/terra.js';
 
 const instantiate = new MsgInstantiateContract(
   wallet.key.accAddress // owner
-  codeId, // code ID
+  +code_id[0], // code ID
   { ...initMsg }, // InitMsg
   { uluna: 10000000, ukrw: 1000000 }, // init coins
   false // migratable
@@ -56,7 +56,7 @@ const instantiateTx = await wallet.createAndSignTx({
 });
 
 const instantiateTxResult = await terra.tx.broadcast(instantiateTx);
-const contractAddress = instantiateTxResult.logs[0].events[0].attributes[2].value;
+const { instantiate_contract: { contract_address } } = instantiateTxResult.logs[0].events;
 ```
 
 ## Executing a Contract
@@ -68,7 +68,7 @@ import { MsgExecuteContract } from '@terra-money/terra.js';
 
 const execute = new MsgExecuteContract(
   wallet.key.accAddress, // sender
-  contractAddress, // contract account address
+  contract_address[0], // contract account address
   { ...executeMsg }, // handle msg
   { uluna: 100000 } // coins
 );
@@ -86,7 +86,7 @@ A contract can define a query handler, which understands requests for data speci
 
 ```ts
 const result = await terra.wasm.contractQuery(
-  contractAddress,
+  contract_address[0],
   { query: { queryMsgArguments } } // query msg
 );
 ```
