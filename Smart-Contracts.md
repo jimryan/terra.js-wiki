@@ -25,15 +25,21 @@ const storeCode = new MsgStoreCode(
   wallet.key.accAddress,
   fs.readFileSync('contract.wasm').toString('base64')
 );
-
 const storeCodeTx = await wallet.createAndSignTx({
   msgs: [storeCode],
-  fee: new StdFee(10000000, { uluna: 10000000 }),
 });
-
 const storeCodeTxResult = await terra.tx.broadcast(storeCodeTx);
+
+console.log(storeCodeTxResult);
+
+if (isTxError(storeCodeTxResult)) {
+  throw new Error(
+    `store code failed. code: ${storeCodeTxResult.code}, codespace: ${storeCodeTxResult.codespace}, raw_log: ${storeCodeTxResult.raw_log}`
+  );
+}
+
 const {
-   store_code: { code_id },
+  store_code: { code_id },
 } = storeCodeTxResult.logs[0].eventsByType;
 ```
 
@@ -46,20 +52,35 @@ To create (instantiate) a smart contract, you must first know the code ID of an 
 ```ts
 import { MsgInstantiateContract } from '@terra-money/terra.js';
 
+store_code: { code_id },
+} = storeCodeTxResult.logs[0].eventsByType;
+
 const instantiate = new MsgInstantiateContract(
-  wallet.key.accAddress // owner
+  wallet.key.accAddress,
   +code_id[0], // code ID
-  { ...initMsg }, // InitMsg
+  {
+    count: 0,
+  }, // InitMsg
   { uluna: 10000000, ukrw: 1000000 }, // init coins
   false // migratable
 );
 
 const instantiateTx = await wallet.createAndSignTx({
-  msgs: [instantiate]
+  msgs: [instantiate],
 });
-
 const instantiateTxResult = await terra.tx.broadcast(instantiateTx);
-const { instantiate_contract: { contract_address } } = instantiateTxResult.logs[0].eventsByType;
+
+console.log(instantiateTxResult);
+
+if (isTxError(instantiateTxResult)) {
+  throw new Error(
+    `instantiate failed. code: ${instantiateTxResult.code}, codespace: ${instantiateTxResult.codespace}, raw_log: ${instantiateTxResult.raw_log}`
+  );
+}
+
+const {
+  instantiate_contract: { contract_address },
+} = instantiateTxResult.logs[0].eventsByType;
 ```
 
 ## Executing a Contract
