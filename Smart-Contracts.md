@@ -10,7 +10,7 @@ import * as fs from 'fs';
 
 // test1 key from localterra accounts
 const mk = new MnemonicKey({
-  mnemonic: 'terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v'
+  mnemonic: 'notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius'
 })
 
 // connect to localterra
