@@ -2,9 +2,9 @@ The following code segment demonstrates how to create a simple price oracle feed
 
 Note the following:
 
-1. Prevotes are automatically generated using [`MsgExchangeRateVote.getPrevote()`](https://terra-project.github.io/terra.js/classes/msgexchangeratevote.html#getprevote)
+1. Prevotes are automatically generated using [`MsgAggregateExchangeRateVote.getPrevote()`](https://terra-project.github.io/terra.js/classes/msgexchangeratevote.html#getprevote)
 
-2. `MsgExchangeRateVote` messages must precede `MsgExchangeRatePrevote` messages in sequence inside a transaction otherwise the `MsgExchangeRatePrevote` would override the current registered outstanding prevote for the validator.
+2. `MsgAggregateExchangeRateVote` messages must precede `MsgAggregateExchangeRatePrevote` messages in sequence inside a transaction otherwise the `MsgAggregateExchangeRatePrevote` would override the current registered outstanding prevote for the validator.
 
 ### Pseudo Feeder 
 
@@ -18,7 +18,7 @@ import {
 
 const {
   MAINNET_LCD_URL = "https://lcd.terra.dev",
-  MAINNET_CHAIN_ID = "columbus-3",
+  MAINNET_CHAIN_ID = "columbus-4",
   TESTNET_LCD_URL = "http://localhost:1317",
   TESTNET_CHAIN_ID = "localterra",
   MNEMONIC = "satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn",
