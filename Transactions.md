@@ -50,5 +50,30 @@ const tx = await wallet.createAndSignTx({
 ### Broadcast Transaction
 
 ```ts
-await terra.tx.broadcast(tx);
+const txResult = await terra.tx.broadcast(tx);
+```
+The default broadcast mode is `block`, which waits until the transaction has been included in a block. This will give you the most information about the transaction, including events and errors while processing.
+
+You can also use `sync` or `async` broadcast modes.
+
+```ts
+// const syncTxResult = await terra.tx.broadcastSync(tx);
+// const asyncTxResult = await terra.tx.broadcastAsync(tx);
+```
+
+### Checking events
+
+If you broadcasted the transaction with `block`, you can get the events emitted by your transaction.
+
+```ts
+import { isTxError } from "@terra-money/terra.js";
+
+const txResult = terra.tx.broadcast(tx);
+
+if (isTxError(txResult)) {
+  throw new Error(`encountered an error while running the transaction: ${txResult.code} ${txResult.codespace}`);
+}
+
+// check for events from the first message
+txResult.logs[0].eventsByType.store_code;
 ```
