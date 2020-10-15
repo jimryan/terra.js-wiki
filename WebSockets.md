@@ -3,7 +3,7 @@
 Terra.js comes with `WebSocketClient`, which abstracts a subscription to Tendermint RPC's WebSocket endpoint. This requires access to a Terra node's RPC server, which may required privileged access as it exposes functions that can kill the node's operation. With LocalTerra, the WebSocket endpoint can be accessed at `ws://localhost:26657/websocket`.
 
 ```ts
-import { LocalTerra, WebSocketClient } from '../src';
+import { LocalTerra, WebSocketClient } from '@terra-money/terra.js';
 
 const wsclient = new WebSocketClient({
   URL: 'ws://localhost:26657/websocket',
