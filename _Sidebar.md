@@ -7,9 +7,11 @@
 - [[Transactions]]
 - [[Fees]]
 - [[Smart Contracts]]
+- [[WebSockets]]
 - [[Station Extension]]
 
 ## Working with Data
+
 - [[Numeric]]
 - [[Coin and Coins]]
 
