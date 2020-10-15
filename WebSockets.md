@@ -54,6 +54,23 @@ You can subscribe to the following recognized Tendermint events:
 In order to specify the Tendermint query, the following syntax is used:
 
 ```ts
+type TendermintQueryOperand = string | number | Date;
+
+interface TendermintQuery {
+  [k: string]:
+    | TendermintQueryOperand
+    | ['>', number | Date]
+    | ['<', number | Date]
+    | ['<=', number | Date]
+    | ['>=', number | Date]
+    | ['CONTAINS', string]
+    | ['EXISTS'];
+}
+```
+
+The following shows an example of how to construct a `TendermintQuery` and use it for a subscription:
+
+```ts
 const tmQuery = {
   "message.action": "send", // 
   "tx.timestamp": [">=", new Date()],
