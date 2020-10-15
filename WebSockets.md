@@ -70,3 +70,18 @@ wsclient.subscribe('Tx', tmQuery, (data, socket) => {
 The resultant query will be:
 
 `tm.event='Tx' AND tx.timestamp >= 2020-12-12 AND store_code.abc EXISTS AND abc.xyz CONTAINS 'terra1...'`
+
+### `subscribeTx`
+
+It is a common use case to subscribe to transactions with a Tendermint query, such as listening for when specific addresses send or receive funds, or when specific events are triggered from within smart contracts. However, it is hard to extract data because the transaction result is encoded in Base64 Amino encoding. If you use `subscribeTx`, Terra.js will automatically inject the `txhash` into the resultant data value so you can more easily look up the transaction to decode it using `LCDClient`.
+
+```ts
+// swap tracker
+wsclient.subscribeTx({ 'message.action': 'swap' }, async data => {
+  console.log('Swap occured!');
+  const txInfo = await terra.tx.txInfo(data.value.TxResult.txhash);
+  if (txInfo.logs) {
+    console.log(txInfo.logs[0].eventsByType);
+  }
+});
+```
