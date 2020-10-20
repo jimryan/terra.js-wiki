@@ -86,7 +86,7 @@ wsclient.subscribe('Tx', tmQuery, (data, socket) => {
 
 The resultant query will be:
 
-`tm.event='Tx' AND tx.timestamp >= 2020-12-12 AND store_code.abc EXISTS AND abc.xyz CONTAINS 'terra1...'`
+`tm.event='Tx' AND message.action='send' tx.timestamp >= 2020-12-12 AND store_code.abc EXISTS AND abc.xyz CONTAINS 'terra1...'`
 
 ### `subscribeTx`
 
