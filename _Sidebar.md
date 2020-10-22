@@ -22,6 +22,7 @@
 ## Recipes
 - [[Oracle Feeder]]
 - [[MultiSend]]
+- [[MsgAuthorization]]
 
 ## Other Resources
 
