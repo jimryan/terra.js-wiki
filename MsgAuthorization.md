@@ -1,3 +1,7 @@
+Following code snippet requires LocalTerra.
+
+1. `test1` creates MsgGrantAuthorization message to grant MsgSend authorization to grantee `test2`
+2. `test2` creates MsgExecAuthorized message to send `2000000000000ukrw` to `test3` from `test1`'s account
 ```ts
 import {
   LCDClient,
