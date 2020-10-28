@@ -5,19 +5,17 @@ Terra.js comes with `WebSocketClient`, which abstracts a subscription to Tenderm
 ```ts
 import { LocalTerra, WebSocketClient } from '@terra-money/terra.js';
 
-const wsclient = new WebSocketClient({
-  URL: 'ws://localhost:26657/websocket',
-});
+const wsclient = new WebSocketClient('ws://localhost:26657/websocket');
 
 const terra = new LocalTerra();
 
 let count = 0;
-wsclient.subscribe('NewBlock', {}, (_, socket) => {
+wsclient.subscribe('NewBlock', {}, (_) => {
   console.log(count);
   count += 1;
 
   if (count === 3) {
-    socket.close();
+    wsclient.destroy();
   }
 });
 
@@ -78,9 +76,8 @@ const tmQuery = {
   "abc.xyz": ["CONTAINS", "terra1..."]
 };
 
-wsclient.subscribe('Tx', tmQuery, (data, socket) => {
+wsclient.subscribe('Tx', tmQuery, (data) => {
   // do something with data ...
-  socket.close(); // close the connection
 });
 ```
 
