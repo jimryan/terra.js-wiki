@@ -79,6 +79,38 @@ const mk = new MnemonicKey({
 });
 ```
 
+### CLIKey
+
+> NOTE: This requires you to have `terracli` installed.
+
+If you want to use keys stored in your `terracli` installation's keyring to sign transactions, you can use `CLIKey`. This also will work for keys that have been registered in your keyring with `--ledger`, using a Ledger hardware device.
+
+```ts
+import { StdFee, MsgSend } from '@terra-money/terra.js';
+import { LocalTerra } from '@terra-money/terra.js';
+import { CLIKey } from '@terra-money/terra.js';
+
+const terra = new LocalTerra();
+const { test1 } = terra.wallets;
+const cliKey = new CLIKey('test111');
+const cliWallet = terra.wallet(cliKey);
+
+const send = new MsgSend(cliWallet.key.accAddress, test1.key.accAddress, {
+  uluna: 100000,
+});
+
+async function main() {
+  const tx = await cliWallet.createAndSignTx({
+    msgs: [send],
+    fee: new StdFee(100000, { uluna: 100000 }),
+  });
+
+  console.log(await terra.tx.broadcast(tx));
+}
+
+main().catch(console.error);
+```
+
 ## Custom Key Implementation
 
 If you need to write your own key management solution, you will need to subclass the abstract `Key` class and provide your own signing function. Note that the key need not expose any details pertaining to the private key -- you could specify a `sign()` function that forwards the signing request to a server or to a hardware wallet, for instance. The remaining functions related to signing (`createSignature()` and `signTx()`) are automatically provided and use `sign()` underneath.
