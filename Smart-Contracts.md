@@ -52,8 +52,6 @@ To create (instantiate) a smart contract, you must first know the code ID of an 
 ```ts
 import { MsgInstantiateContract } from '@terra-money/terra.js';
 
-store_code: { code_id },
-} = storeCodeTxResult.logs[0].eventsByType;
 
 const instantiate = new MsgInstantiateContract(
   wallet.key.accAddress,
