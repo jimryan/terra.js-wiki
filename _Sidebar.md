@@ -7,6 +7,7 @@
 - [[Transactions]]
 - [[Fees]]
 - [[Smart Contracts]]
+  - [[CW20 Tokens]]
 - [[WebSockets]]
 - [[Station Extension]]
 
