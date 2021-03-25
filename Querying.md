@@ -15,8 +15,8 @@ Each module has its own set of querying functions. You can explore the documenta
 
 - [`auth`](https://terra-project.github.io/terra.js/classes/client_lcd_api_authapi.authapi.html)
 - [`bank`](https://terra-project.github.io/terra.js/classes/client_lcd_api_bankapi.bankapi.html)
-- [`distribution`](https://terra-project.github.io/terra.js/classes/distributionapi.html)
-- [`gov`](https://terra-project.github.io/terra.js/classes/distributionapi.html)
+- [`distribution`](https://terra-project.github.io/terra.js/classes/client_lcd_api_distributionapi.distributionapi.html)
+- [`gov`](https://terra-project.github.io/terra.js/classes/client_lcd_api_govapi.govapi.html)
 - [`market`](https://terra-project.github.io/terra.js/classes/marketapi.html)
 - [`mint`](https://terra-project.github.io/terra.js/classes/mintapi.html)
 - [`msgauth`](https://terra-project.github.io/terra.js/classes/msgauthapi.html)
