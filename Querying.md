@@ -13,8 +13,8 @@ main();
 
 Each module has its own set of querying functions. You can explore the documentation to get a comprehensive list:
 
-- [`auth`](https://terra-project.github.io/terra.js/classes/authapi.html)
-- [`bank`](https://terra-project.github.io/terra.js/classes/bankapi.html)
+- [`auth`](https://terra-project.github.io/terra.js/classes/client_lcd_api_authapi.authapi.html)
+- [`bank`](https://terra-project.github.io/terra.js/classes/client_lcd_api_bankapi.bankapi.html)
 - [`distribution`](https://terra-project.github.io/terra.js/classes/distributionapi.html)
 - [`gov`](https://terra-project.github.io/terra.js/classes/distributionapi.html)
 - [`market`](https://terra-project.github.io/terra.js/classes/marketapi.html)
