@@ -1,4 +1,4 @@
-The following code segment demonstrates how to create a simple price oracle feeder with Terra.js, using a [LocalTerra](https://github.com/terra-project/LocalTerra) network. The prices aren't live in this example -- it just tracks the public LCD node's current registered oracle price and submits them to the local testnet.
+The following code segment demonstrates how to create a simple price oracle feeder with Terra.js, using a [LocalTerra](https://github.com/terra-money/LocalTerra) network. The prices aren't live in this example -- it just tracks the public LCD node's current registered oracle price and submits them to the local testnet.
 
 Note the following:
 
